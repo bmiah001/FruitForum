@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>See Users <%=siteName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>All the users at <%=siteName%></h1>
+    <p>Check for users on this page.</p>
+    <ul>
+      <% for (let User of availableUsers) { %>
+        <li><%= User.Username %></li>
+      <% } %>
+    </ul>
+
+  </body>
+</html>

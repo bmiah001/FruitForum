@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Add a post <%=siteName%></title>
+    <link rel="stylesheet"  type="text/css" href="/main.css" />
+  </head>
+  <body>
+    <h1>Add a post at <%=siteName%></h1>
+    <p>You can add a post here.</p>
+
+    <form method="POST" action="/addNewPost">
+        <p>Content: <textarea id="content" name="content" required></textarea></p>
+        <p>User: <input type="text" name="Username" required></p>
+        <p>Topic: <input type="text" name="TopicName" required></p>
+        <button type="submit">Add Post</button>
+    </form>
+
+
+
+  </body>
+</html>
