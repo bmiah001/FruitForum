@@ -27,8 +27,8 @@
 
     //FOR USERS
     app.get('/existing_users', function(req, res) {
-         let sqlquery = "SELECT * FROM User"; // query database to get all the users
-         // execute sql query
+         let sqlquery = "SELECT * FROM User"; // getting the suers
+         // the db query
          db.query(sqlquery, (err, result) => {
          if (err) {
          res.redirect('./'); 
@@ -41,16 +41,16 @@
     
 
     app.post('/userAdded', function (req,res) {
-        // saving data in database
+        // adding to the database
         let sqlquery = "INSERT INTO user (Username) VALUES (?)";
-        // execute sql query
+        // the db query
         let newrecord = [req.body.username];
         db.query(sqlquery, newrecord, (err, result) => {
         if (err) {
         return console.error(err.message);
         }
         else {
-            // when the book is added the name and price is shown
+            // when the user is added the username is shown
         res.send(' This user has been added to database, Username: '
             + req.body.username);
         }
@@ -60,8 +60,8 @@
     
     //FOR TOPICS
     app.get('/existing_topics', function(req, res) {
-        let sqlquery = "SELECT * FROM Topic"; // query database to get all the topics
-        // execute sql query
+        let sqlquery = "SELECT * FROM Topic"; // getting the topics
+        // starting the sql query
         db.query(sqlquery, (err, result) => {
         if (err) {
         res.redirect('./'); 
@@ -76,7 +76,7 @@
     app.post('/TopicAdded', function (req,res) {
         // saving data in database
         let sqlquery = "INSERT INTO Topic (TopicName) VALUES (?)";
-        // execute sql query
+
         let newrecord = [req.body.TopicName];
         db.query(sqlquery, newrecord, (err, result) => {
         if (err) {
@@ -91,32 +91,55 @@
         });
 
     //FOR POSTS///
-    
+    // This is for posting the new post,it takes from user and topic.
     app.post('/addNewPost', function (req, res) {
         let content = req.body.content;
         let username = req.body.Username;
         let topicname = req.body.TopicName;
     
-        // Look up UserID based on the provided username
+        //User ID from username
         let fruitUser = "SELECT UserID FROM User WHERE Username = ?";
         db.query(fruitUser, [username], (errUser, resultUser) => {
-            // Look up TopicID based on the provided topicname
-            let fruitTopic = "SELECT TopicID FROM Topic WHERE TopicName = ?";
-            db.query(fruitTopic, [topicname], (errTopic, resultTopic) => {
-                // Insert the post into the Post table
-                let fruitPost = "INSERT INTO Post (Content, UserID, TopicID) VALUES (?, ?, ?)";
-                let postRecord = [content, resultUser[0].UserID, resultTopic[0].TopicID];
+        //topicID from topicname
+        let fruitTopic = "SELECT TopicID FROM Topic WHERE TopicName = ?";
+        db.query(fruitTopic, [topicname], (errTopic, resultTopic) => {
+        // Insert the post into the Post table
+        let fruitPost = "INSERT INTO Post (Content, UserID, TopicID) VALUES (?, ?, ?)";
+        let postRecord = [content, resultUser[0].UserID, resultTopic[0].TopicID];
+
+        db.query(fruitPost, postRecord, (errPost, resultPost) => {
+            if (errPost) {
+                return console.error(errPost.message);
+            }
     
-                db.query(fruitPost, postRecord, (errPost, resultPost) => {
-                    if (errPost) {
-                        return console.error(errPost.message);
-                    }
-    
-                    // Post added successfully
-                    res.send('Post added successfully: ' + content);
-                });
-            });
-        });
+            // Post added to the website
+            res.send('post added to Fruit Forum: ' + content);
     });
+    });
+    });
+    });
+
+    app.get('/existing_posts', function(req, res) {
+        let sqlquery = `
+          SELECT Post.Content, User.Username, Topic.TopicName
+          FROM Post
+          JOIN User ON Post.UserID = User.UserID
+          JOIN Topic ON Post.TopicID = Topic.TopicID
+        `;
+      
+        // the query gets the all the posts with the usernames and the topci names, 
+        //that are tied to the UserIDand TopicID
+        db.query(sqlquery, (err, result) => {
+          if (err) {
+            res.redirect('/');
+          }
+          let newData = Object.assign({}, siteData, { availablePosts: result });
+          res.render("existing_posts.ejs", newData);
+        });
+      });
     
+//FOR POSTS ABOVE///
+
+
+
     }

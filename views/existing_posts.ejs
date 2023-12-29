@@ -7,7 +7,15 @@
   <body>
     <h1>See existing posts at <%=siteName%></h1>
     <p>You can check existing posts here.</p>
-
+    <ul>
+      <% for (let post of availablePosts) { %>
+        <li>
+          user: <%= post.Username %><br>
+          topic: <%= post.TopicName %><br>
+          post: <%= post.Content %>
+        </li>
+      <% } %>
+    </ul>
 
 
   </body>
