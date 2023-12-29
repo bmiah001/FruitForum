@@ -10,9 +10,11 @@
     <ul>
       <% for (let post of availablePosts) { %>
         <li>
-          user: <%= post.Username %><br>
-          topic: <%= post.TopicName %><br>
-          post: <%= post.Content %>
+          <li>
+            <strong>user: <%= post.Username %></strong><br>
+            <strong>topic: <%= post.TopicName %></strong><br>
+            post: <%= post.Content %>
+          </li>
         </li>
       <% } %>
     </ul>
