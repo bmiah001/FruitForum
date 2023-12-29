@@ -1,43 +1,48 @@
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    color: darkcyan;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center; 
+  background-color: #f0f0f0; 
 }
 
-h2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    color: cadetblue;
+h1, h2 {
+  font-size: 28px; 
+  color: #333; 
 }
 
-p,li {
-    font-family: Arial, Helvetica, sans-serif;
+p, li {
+  font-size: 18px; 
+  color: #555; 
 }
 
-a:link {
-    color: orangered;
-    text-decoration: none;
-    padding:5px;
-  }
-  
-  /* visited link */
-  a:visited {
-    color: tomato;
-    text-decoration: none;
-    padding:5px;
-  }
-  
-  /* mouse over link */
-  a:hover {
-    color: white;
-    text-decoration: none;
-    background-color: orangered;
-    padding:5px;
-  }
-  
-  /* selected link */
-  a:active {
-    color: blue;
-    text-decoration: none;
-    padding:5px;
-  }
+a {
+  color: #4CAF50; 
+  text-decoration: none;
+  padding: 5px;
+
+}
+
+
+a:hover {
+  color: #fff; 
+  background-color: #4CAF50; 
+  border-radius: 10px; 
+}
+
+.box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; 
+  max-width: 600px; 
+}
+
+.box h1, .box h2, .box p, .box li {
+  text-align: left; 
+  margin: 10px 0; 
+}
+
+.box ul {
+  list-style-type: none;
+  margin: 10px 0; 
+}
